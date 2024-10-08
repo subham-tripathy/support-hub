@@ -1,0 +1,27 @@
+#profile {
+    font-size: 25px;
+    font-weight: bold;
+    border: 5px solid black;
+    width: max-content;
+    margin: auto;
+    padding: 50px 150px;
+    padding-top: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#profile div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}

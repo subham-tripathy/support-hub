@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/public/css/style.css" />
+        <style>
+            #register-complaint {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #register-complaint form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #register-complaint form div input {
+                padding: 10px;
+            }
+
+            #register-complaint form div {
+                font-size: 20px;
+                align-items: center;
+                margin: 20px auto;
+            }
+            #register-complaint form textarea {
+                width: 600px;
+                height: 300px;
+                margin: 10px 0;
+            }
+
+            #register-complaint form button {
+                padding: 10px 20px;
+                background-color: #000;
+                color: #fff;
+                border: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>SupportHub</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="register-complaint">
+                <h2>Register Complaint</h2>
+                <form method="POST">
+                    <div style="display: flex; gap: 20px">
+                        <label for="title">Title: </label>
+                        <input type="text" id="title" required />
+                    </div>
+                    <label for="complaint">Complaint:</label>
+                    <textarea
+                        name="complaint"
+                        id="complaint"
+                        cols="30"
+                        rows="10"
+                        required
+                    ></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </section>
+        </main>
+        <script>
+            const title = document.querySelector("#title");
+            const textarea = document.querySelector("textarea");
+            const form = document.querySelector("form");
+            const cookie = document.cookie.split(";");
+            let id;
+            cookie.forEach((element) => {
+                element = element.split("=");
+                if (element[0] === "supporthubuser") {
+                    id = element[1];
+                }
+            });
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                fetch(
+                    "/registerComplaint?title=" +
+                        title.value +
+                        "&id=" +
+                        id +
+                        "&text=" +
+                        textarea.value,
+                    { method: "POST" }
+                )
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.status === "success") {
+                            alert("Complaint registered successfully");
+                        } else {
+                            alert("Failed to register complaint");
+                        }
+                    });
+            });
+        </script>
+    </body>
+</html>

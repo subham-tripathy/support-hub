@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <style>
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 30px;
+        }
+        
+        table {
+            margin-top: 30px;
+            width: 60%;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            text-align: center;
+            font-size: 22px;
+        }
+        
+        th,
+        td {
+            padding: 15px;
+        }
+        
+        th {
+            background-color: grey;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>SupportHub</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Check Status</h2>
+        <table>
+            <tr>
+                <th>Complaint ID</th>
+                <th>Complaint Status</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Resolved</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Pending</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Pending</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Resolved</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Resolved</td>
+            </tr>
+    </main>
+    <script>
+        document.querySelectorAll('td').forEach((td) => {
+            if (td.textContent === 'Resolved') {
+                td.style.backgroundColor = '#29AB87';
+                td.style.color = 'white';
+            } else if (td.textContent === 'Pending') {
+                td.style.backgroundColor = '#C21807';
+                td.style.color = 'white';
+            }
+        });
+    </script>
+</body>
+
+</html>

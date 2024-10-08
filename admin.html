@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/public/css/style.css" />
+        <style>
+            main {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding-top: 30px;
+                text-align: center;
+            }
+
+            table {
+                margin-top: 30px;
+                width: 80vw;
+                border-collapse: collapse;
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                text-align: center;
+            }
+
+            th,
+            td {
+                font-size: 20px;
+                padding: 15px;
+            }
+
+            th {
+                font-size: 25px;
+                background-color: grey;
+                color: white;
+            }
+
+            tr:nth-child(even) {
+                background-color: lightgrey;
+            }
+            button {
+                background-color: #4caf50;
+                color: white;
+                font-size: 20px;
+                font-weight: bold;
+                padding: 15px 5px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 80%;
+            }
+            #complaintBox {
+                display: none;
+                position: absolute;
+                width: 50vw;
+                height: 50vh;
+                background-color: #f1f1f1;
+                border-radius: 10px;
+                padding: 50px;
+                border: 1px solid black;
+                box-shadow: 0 0 10px 0 black;
+                font-size: 20px;
+            }
+            #complaintBox button {
+                width: 100px;
+                height: 100px;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background-color: red;
+                color: white;
+                font-size: 20px;
+                font-weight: bold;
+                padding: 5px;
+                border: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>SupportHub</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="btns" style="display: flex; gap: 20px">
+                <button id="userbtn">See Users</button>
+                <button id="combtn">See Complaints</button>
+            </section>
+            <section id="users">
+                <h1>Registered Users</h1>
+                <table>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                    </tr>
+                </table>
+            </section>
+            <section id="issues" style="display: none">
+                <h1>Registered Complaints</h1>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Complaint</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </table>
+            </section>
+            <div id="complaintBox">
+                <button>close</button>
+                <p></p>
+            </div>
+        </main>
+        <script>
+            const cookie = document.cookie.split(";");
+            let gotCookie = false;
+            cookie.forEach((element) => {
+                element = element.split("=");
+                if (String(element[0]).trim() == "supporthubuser") {
+                    if (element[1].toLowerCase() == "admin") {
+                        document.querySelector("header nav ul").innerHTML = `
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/profile">Hi, ${element[1]}</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                    `;
+                    } else {
+                        document.querySelector("header nav ul").innerHTML = `
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/profile">Hi, ${element[1]}</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="/registercomplaint">Complaint Register</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                        `;
+                    }
+                    gotCookie = true;
+                }
+            });
+            if (gotCookie === false) {
+                window.location.href = "/login";
+            }
+
+            const userbtn = document.getElementById("userbtn");
+            const combtn = document.getElementById("combtn");
+            const users = document.getElementById("users");
+            const issues = document.getElementById("issues");
+            userbtn.addEventListener("click", () => {
+                users.style.display = "block";
+                issues.style.display = "none";
+            });
+            combtn.addEventListener("click", () => {
+                users.style.display = "none";
+                issues.style.display = "block";
+            });
+            document
+                .querySelector("#complaintBox button")
+                .addEventListener("click", () => {
+                    document.querySelector("#complaintBox").style.display =
+                        "none";
+                });
+
+            fetch("/fetchUsers")
+                .then((res) => res.json())
+                .then((data) => {
+                    data.forEach((element) => {
+                        const tr = document.createElement("tr");
+                        const tduserid = document.createElement("td");
+                        const tdname = document.createElement("td");
+                        tdname.textContent = element.name.replaceAll(
+                            "%20",
+                            " "
+                        );
+                        tduserid.textContent = element.id;
+                        tr.appendChild(tduserid);
+                        tr.appendChild(tdname);
+                        document.querySelector("#users table").appendChild(tr);
+                    });
+                });
+            fetch("/fetchComplaints")
+                .then((res) => res.json())
+                .then((data) => {
+                    data.forEach((element) => {
+                        const tr = document.createElement("tr");
+                        const tdcomplaintid = document.createElement("td");
+                        const tdcomplaint = document.createElement("td");
+                        const tdstatus = document.createElement("td");
+                        const tdaction = document.createElement("td");
+                        const viewbtn = document.createElement("button");
+                        const solvebtn = document.createElement("button");
+                        tdcomplaintid.textContent = element.id;
+                        tdcomplaint.textContent = element.title.replaceAll(
+                            "%20",
+                            " "
+                        );
+                        viewbtn.textContent = "View Complaint";
+                        viewbtn.addEventListener("click", () => {
+                            document.querySelector(
+                                "#complaintBox p"
+                            ).textContent = element.text.replaceAll("%20", " ");
+                            document.querySelector(
+                                "#complaintBox"
+                            ).style.display = "block";
+                        });
+                        solvebtn.textContent = "Solve It";
+                        solvebtn.addEventListener("click", () => {
+                            window.location.href = `/messages?rid=${element.id}`;
+                        });
+                        tdstatus.textContent = "Pending";
+                        tr.appendChild(tdcomplaintid);
+                        tr.appendChild(tdcomplaint);
+                        tr.appendChild(tdstatus);
+                        tdaction.appendChild(viewbtn);
+                        tdaction.appendChild(solvebtn);
+                        tr.appendChild(tdaction);
+                        document.querySelector("#issues table").appendChild(tr);
+                    });
+                });
+        </script>
+    </body>
+</html>

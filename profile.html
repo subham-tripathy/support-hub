@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/public/css/style.css" />
+        <link rel="stylesheet" href="/public/css/home.css" />
+    </head>
+    <body>
+        <header>
+            <h1>SupportHub</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="profile">
+                <h2>Profile</h2>
+                <div class="profile-info">
+                    <img
+                        src="https://pics.craiyon.com/2023-07-15/dc2ec5a571974417a5551420a4fb0587.webp"
+                        alt="Profile Picture"
+                        id="profile-pic"
+                    />
+                    <h3 id="name"></h3>
+                    <p id="email"></p>
+                </div>
+            </section>
+        </main>
+        <script>
+            const cookie = document.cookie.split(";");
+            let gotCookie = false;
+            cookie.forEach((element) => {
+                element = element.split("=");
+                if (String(element[0]).trim() == "supporthubuser") {
+                    if (element[1].toLowerCase() == 'admin'){
+                        window.location.href = "/admin";
+                    }
+                    document.querySelector("#name").innerText = element[1];
+                    document.querySelector("#email").innerText =
+                        element[1] + "@supporthub.com";
+                    document.querySelector("header nav ul").innerHTML = `
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/profile">Hi, ${element[1]}</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="/registercomplaint">Complaint Register</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                    `;
+                    gotCookie = true;
+                }
+            });
+            if (gotCookie === false) {
+                window.location.href = "/login";
+            }
+        </script>
+    </body>
+</html>

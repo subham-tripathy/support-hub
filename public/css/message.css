@@ -1,0 +1,85 @@
+@font-face {
+    font-family: "Moderustic";
+    src: url("/public/fonts/Moderustic-VariableFont_wght.ttf");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    transition: 0.3s;
+    font-family: "Moderustic";
+}
+body {
+    background-color: beige;
+    min-height: 100vh;
+}
+
+#chat_nav {
+    position: sticky;
+    top: 0;
+    padding: 10px;
+    background-color: gainsboro;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+#chat_nav img {
+    height: 50px;
+    border-radius: 100%;
+}
+
+#chat_section {
+    height: max-content;
+    margin-bottom: 50px;
+    padding: 5px 20px;
+}
+#chat_section .receiver,
+#chat_section .sender {
+    width: max-content;
+    padding: 5px 15px;
+    border: 1px solid white;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#chat_section .receiver {
+    background-color: aquamarine;
+}
+
+#chat_section .sender {
+    background-color: aqua;
+    margin-left: auto;
+}
+
+#write_message_section {
+    background-color: rgba(255, 255, 255, 0.644);
+    padding: 10px;
+    backdrop-filter: blur(5px);
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#write_message_section input {
+    position: relative;
+    width: 90%;
+    font-size: 20px;
+    padding: 5px;
+}
+
+#write_message_section button {
+    background-color: aqua;
+    height: max-content;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px 10px;
+    outline: none;
+    border: 1px solid white;
+    box-shadow: 2px 2px 2px black;
+    border-radius: 5px;
+}
