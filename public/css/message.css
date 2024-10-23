@@ -22,6 +22,7 @@ body {
     display: flex;
     align-items: center;
     gap: 40px;
+    z-index: 1;
 }
 
 #chat_nav img {
@@ -34,6 +35,7 @@ body {
     margin-bottom: 50px;
     padding: 5px 20px;
 }
+
 #chat_section .receiver,
 #chat_section .sender {
     width: max-content;
@@ -45,12 +47,27 @@ body {
     margin-bottom: 5px;
 }
 
+#chat_section .sender button {
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 35px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#chat_section .sender img {
+    position: relative;
+    height: 100%;
+}
+
 #chat_section .receiver {
     background-color: aquamarine;
 }
 
 #chat_section .sender {
     background-color: aqua;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-left: auto;
 }
 

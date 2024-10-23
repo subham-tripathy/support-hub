@@ -1,12 +1,23 @@
 @font-face {
     font-family: "Moderustic";
-    src: url('/public/fonts/Moderustic-VariableFont_wght.ttf');
+    src: url("/public/fonts/Moderustic-VariableFont_wght.ttf");
 }
+
 * {
     margin: 0;
     padding: 0;
     transition: 0.3s;
     font-family: "Moderustic";
+}
+
+body {
+    background-image: url("/public/images/bg.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    backdrop-filter: blur(10px);
+    min-height: 100vh;
 }
 
 header {
@@ -17,7 +28,7 @@ header {
     color: white;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 10%;
+    padding: 15px 7%;
     margin-bottom: 100px;
 }
 
@@ -30,24 +41,25 @@ header h1 {
 header hr {
     height: 40px;
     margin: 0 10px;
-    border: 1px solid white;
+    border: 2px solid white;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: space-between;
-    gap: 25px;
+    align-items: center;
 }
 
 nav ul li a {
     text-decoration: none;
-    padding: 5px 20px;
+    padding: 5px 10px;
+    margin: 0 10px;
     font-weight: bold;
     font-size: 20px;
-    border-radius: 100px;
+    border-radius: 3px;
     color: white;
 }
+
 nav ul li a:hover {
     background-color: white;
     color: #5c04fc;
@@ -55,4 +67,24 @@ nav ul li a:hover {
 
 #footer {
     background-color: #5c04fc;
+}
+
+footer ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+}
+
+footer p {
+    margin-top: 30px;
+    height: 50px;
+    color: white;
+    text-align: center;
+}
+footer ul li a {
+    text-decoration: none;
+    color: white;
 }

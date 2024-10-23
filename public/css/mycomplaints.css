@@ -1,0 +1,71 @@
+table,
+tr,
+td,
+th {
+    border: 2px solid white;
+    color: white;
+}
+
+th {
+    font-size: 30px;
+}
+
+td {
+    text-align: center;
+    padding: 5px 10px;
+}
+
+tr.pending {
+    background-color: #cd5c5c;
+}
+
+tr.completed {
+    background-color: #29ab87;
+}
+
+table {
+    margin: auto;
+    color: white;
+    text-shadow: 1px 1px 5px black;
+}
+
+table .action button {
+    cursor: pointer;
+    background: transparent;
+    border: 2px solid white;
+    outline: none;
+    margin: 5px 7px;
+    padding: 3px 5px;
+    border-radius: 4px;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    font-size: 17px;
+}
+
+#viewcomplaint {
+    display: none;
+    background-color: aqua;
+    padding: 7px;
+    height: 80vh;
+    width: 80vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#viewcomplaint button {
+    cursor: pointer;
+    background-color: red;
+    border: 2px solid white;
+    outline: none;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    font-weight: bolder;
+    text-shadow: 0px 0px 3px black;
+}
