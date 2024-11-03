@@ -16,11 +16,11 @@ td {
 }
 
 tr.pending {
-    background-color: #cd5c5c;
+    background-color: red;
 }
 
 tr.completed {
-    background-color: #29ab87;
+    background-color: green;
 }
 
 table {

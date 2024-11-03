@@ -38,6 +38,10 @@ app.get("/profile", (req, res) => {
     res.sendFile(__dirname + "/profile.html");
 });
 
+app.get("/mycomplaints", (req, res) => {
+    res.sendFile(__dirname + "/mycomplaints.html");
+});
+
 app.get("/registercomplaint", (req, res) => {
     res.sendFile(__dirname + "/registercomplaint.html");
 });
@@ -159,6 +163,19 @@ app.post("/registerComplaint", (req, res) => {
     );
 });
 
+app.post("/markAsCompleted", (req, res) => {
+    const { id } = req.body;
+    con.query(
+        `update complaints set status = "completed" where id = "${id}"`,
+        (err, result) => {
+            if(err){
+                console.log("error is markAsCompleted")
+                console.log(err)
+            }
+        }
+    );
+});
+
 app.get("/fetchUsers", (req, res) => {
     con.query("select * from users", function (err, result) {
         if (err) throw err;
@@ -247,6 +264,22 @@ app.post("/fetchMyComplaints", (req, res) => {
         `select * from complaints where id = "${id}"`,
         function (err, result) {
             res.json(result);
+        }
+    );
+});
+
+app.post("/sendSolution", (req, res) => {
+    const { userID, solution } = req.body;
+    con.query(
+        `update complaints set solution = "${solution}" where id = "${userID}"`,
+        (err, result) => {
+            if (err) {
+                console.log("error in sending solution");
+                console.log(err);
+                res.json({ msg: "error" });
+            } else {
+                res.json({ msg: "success" });
+            }
         }
     );
 });

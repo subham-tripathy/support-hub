@@ -32,8 +32,8 @@ fetch("/fetchMyComplaints", {
             btn1.style.backgroundColor = "rgb(160, 160, 160)";
             if (complaint.status == "pending") {
                 btn2.textContent = "Mark As Solved";
-                btn2.style.backgroundColor = "#29ab87";
-                btn1.addEventListener("click", () => {
+                btn2.style.backgroundColor = "green";
+                btn2.addEventListener("click", () => {
                     markAsCompleted();
                 });
             } else {
@@ -69,7 +69,18 @@ function viewComplaint(solution_description) {
     document.querySelector("#viewcomplaint").style.display = "block";
 }
 
-function markAsCompleted() {}
+function markAsCompleted() {
+    fetch("/markAsCompleted", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            id: uid,
+        }),
+    });
+    window.location.reload();
+}
 
 document.querySelector("#closeviewcomplaint").addEventListener("click", () => {
     document.querySelector("#viewcomplaint").style.display = "none";

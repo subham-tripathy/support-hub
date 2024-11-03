@@ -33,6 +33,29 @@
             <button id="closeviewcomplaint">X</button>
             <p></p>
         </section>
+        <script>
+            const cookie = document.cookie.split(";");
+            let gotCookie = false;
+            cookie.forEach((element) => {
+                element = element.split("=");
+                if (String(element[0]).trim() == "supporthubuser") {
+                    if (element[1].toLowerCase() == "admin") {
+                        window.location.href = "/admin";
+                    }
+                    document.querySelector("header nav ul").innerHTML = `
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/profile">Hi, ${element[1]}</a></li>
+                    <li><a href="/mycomplaints">My Complaints</a></li>
+                    <li><a href="/registercomplaint">Complaint Register</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                    `;
+                    gotCookie = true;
+                }
+            });
+            if (gotCookie === false) {
+                window.location.href = "/login";
+            }
+        </script>
         <script src="/public/scripts/mycomplaints.js"></script>
     </body>
 </html>

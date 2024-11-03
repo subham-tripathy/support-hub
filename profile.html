@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/public/css/style.css" />
-        <link rel="stylesheet" href="/public/css/home.css" />
+        <link rel="stylesheet" href="/public/css/profile.css" />
     </head>
     <body>
         <header>
@@ -38,7 +38,7 @@
             cookie.forEach((element) => {
                 element = element.split("=");
                 if (String(element[0]).trim() == "supporthubuser") {
-                    if (element[1].toLowerCase() == 'admin'){
+                    if (element[1].toLowerCase() == "admin") {
                         window.location.href = "/admin";
                     }
                     document.querySelector("#name").innerText = element[1];
@@ -47,7 +47,7 @@
                     document.querySelector("header nav ul").innerHTML = `
                     <li><a href="/">Home</a></li>
                     <li><a href="/profile">Hi, ${element[1]}</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="/mycomplaints">My Complaints</a></li>
                     <li><a href="/registercomplaint">Complaint Register</a></li>
                     <li><a href="/logout">Logout</a></li>
                     `;
